@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/item1"
+        android:title="일기"
+        android:icon="@drawable/ic_baseline_check_box_outline_blank_24"
+        android:enabled="true"
+        />
+    <item
+        android:id="@+id/item2"
+        android:title="메모"
+        android:icon="@drawable/ic_baseline_article_24"
+        android:enabled="true"
+        />
+    <item
+        android:id="@+id/item3"
+        android:title="일정"
+        android:icon="@drawable/ic_baseline_calendar_today_24"
+        android:enabled="true"
+        />
+    <item
+        android:id="@+id/item4"
+        android:title="설정"
+        android:icon="@drawable/ic_baseline_settings_24"
+        android:enabled="true"
+        />
+
+</menu>
