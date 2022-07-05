@@ -2,28 +2,40 @@ package com.example.calendarmemo;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.CalendarView;
+import android.widget.LinearLayout;
 import android.widget.PopupMenu;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.ui.AppBarConfiguration;
 
+import com.example.calendarmemo.ui.home.HomeFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.tabs.TabLayout;
 
 public class MainActivity extends AppCompatActivity {
     private AppCompatActivity binding;
     public CalendarView calendarView;
+    LinearLayout hom_ly;
+    BottomNavigationView bottomNavigationView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         calendarView = findViewById(R.id.CalendarView);
 
-        BottomNavigationView navView = findViewById(R.id.nav_view);
-        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.item1, R.id.item2, R.id.item3, R.id.item4).build();
+        init(); //객체 정의
+        SettingListener(); //리스너 등록
+        bottomNavigationView.setSelectedItemId(R.id.homeB);
 
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
@@ -53,5 +65,42 @@ public class MainActivity extends AppCompatActivity {
                 popup.show();
             }
         });
+
+    }//onCreate
+     private void init () {
+    hom_ly = findViewById(R.id.home_ly);
+    bottomNavigationView = findViewById(R.id.nav_view);
+}
+    private void SettingListener () {
+        //선택 리스너 등록
+        bottomNavigationView.setOnNavigationItemSelectedListener(new TabSelectedListener());
     }
+class TabSelectedListener implements BottomNavigationView.OnNavigationItemSelectedListener {
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        switch (menuItem.getItemId()) {
+            case R.id.homeB: {
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.home_ly, new HomeFragment())
+                        .commit();
+                return true;
+            }
+            case R.id.item1: {
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.home_ly, new DiaryFragment())
+                        .commit();
+                return true;
+            }
+            case R.id.item2: {
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.home_ly, new MemoFragment())
+                        .commit();
+                return true;
+            }
+
+        }
+
+        return false;
+    }
+}
 }
