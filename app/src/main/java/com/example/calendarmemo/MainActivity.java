@@ -2,40 +2,36 @@ package com.example.calendarmemo;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.CalendarView;
-import android.widget.LinearLayout;
 import android.widget.PopupMenu;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.navigation.ui.AppBarConfiguration;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
-import com.example.calendarmemo.ui.home.HomeFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.tabs.TabLayout;
 
 public class MainActivity extends AppCompatActivity {
     private AppCompatActivity binding;
     public CalendarView calendarView;
-    LinearLayout hom_ly;
-    BottomNavigationView bottomNavigationView;
-
+    private FragmentManager fragmentManager = getSupportFragmentManager();
+    private MainHome fragmentHome = new MainHome();
+    private MemoViewFragment fragmentMemo = new MemoViewFragment();
+    private DiaryViewFragment fragmentDiary = new DiaryViewFragment();
+    private CalendarViewFragment fragmentCalendar = new CalendarViewFragment();
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         calendarView = findViewById(R.id.CalendarView);
 
-        init(); //객체 정의
-        SettingListener(); //리스너 등록
-        bottomNavigationView.setSelectedItemId(R.id.homeB);
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.replace(R.id.nav_view, fragmentCalendar).commitAllowingStateLoss();
+
+        BottomNavigationView bottomNavigationView = findViewById(R.id.nav_view);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new ItemSelectedListener());
 
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
@@ -67,40 +63,28 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }//onCreate
-     private void init () {
-    hom_ly = findViewById(R.id.home_ly);
-    bottomNavigationView = findViewById(R.id.nav_view);
-}
-    private void SettingListener () {
-        //선택 리스너 등록
-        bottomNavigationView.setOnNavigationItemSelectedListener(new TabSelectedListener());
-    }
-class TabSelectedListener implements BottomNavigationView.OnNavigationItemSelectedListener {
+
+class ItemSelectedListener implements BottomNavigationView.OnNavigationItemSelectedListener {
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-        switch (menuItem.getItemId()) {
-            case R.id.homeB: {
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.home_ly, new HomeFragment())
-                        .commit();
-                return true;
-            }
-            case R.id.item1: {
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.home_ly, new DiaryFragment())
-                        .commit();
-                return true;
-            }
-            case R.id.item2: {
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.home_ly, new MemoFragment())
-                        .commit();
-                return true;
-            }
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+
+        switch (menuItem.getItemId()){
+            case R.id.homeB:
+                transaction.replace(R.id.nav_view,fragmentHome).commitAllowingStateLoss();
+                break;
+            case R.id.item1:
+                transaction.replace(R.id.nav_view,fragmentDiary).commitAllowingStateLoss();
+                break;
+            case R.id.item2:
+                transaction.replace(R.id.nav_view,fragmentMemo).commitAllowingStateLoss();
+                break;
+            case R.id.item3:
+                transaction.replace(R.id.nav_view,fragmentCalendar).commitAllowingStateLoss();
+                break;
 
         }
-
-        return false;
+        return true;
     }
 }
 }

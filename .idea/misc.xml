@@ -10,9 +10,12 @@
         <entry key="..\:/Users/Park/AndroidStudioProjects/CalendarMemo/app/src/main/res/menu/menu_item.xml" value="0.26875" />
         <entry key="..\:/Users/Park/AndroidStudioProjects/calendarmemo/app/src/main/res/layout/activity_main.xml" value="0.2318840579710145" />
         <entry key="..\:/Users/Park/AndroidStudioProjects/calendarmemo/app/src/main/res/layout/fragment_blank.xml" value="0.26875" />
+        <entry key="..\:/Users/Park/AndroidStudioProjects/calendarmemo/app/src/main/res/layout/fragment_calendar_view.xml" value="0.1" />
         <entry key="..\:/Users/Park/AndroidStudioProjects/calendarmemo/app/src/main/res/layout/fragment_diary.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Park/AndroidStudioProjects/calendarmemo/app/src/main/res/layout/fragment_diary_view.xml" value="0.1" />
         <entry key="..\:/Users/Park/AndroidStudioProjects/calendarmemo/app/src/main/res/layout/fragment_memo.xml" value="0.2563405797101449" />
         <entry key="..\:/Users/Park/AndroidStudioProjects/calendarmemo/app/src/main/res/layout/memo.xml" value="0.1" />
+        <entry key="..\:/Users/Park/AndroidStudioProjects/calendarmemo/app/src/main/res/layout/memo_view_fragment.xml" value="0.1" />
         <entry key="..\:/Users/Park/AndroidStudioProjects/calendarmemo/app/src/main/res/layout/memoview.xml" value="0.24003623188405798" />
         <entry key="..\:/Users/Park/AndroidStudioProjects/calendarmemo/app/src/main/res/layout/recyclerview_item.xml" value="0.1" />
         <entry key="..\:/Users/Park/AndroidStudioProjects/calendarmemo/app/src/main/res/menu/bottom_nav_menu.xml" value="0.26461538461538464" />
